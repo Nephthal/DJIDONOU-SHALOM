@@ -22,7 +22,7 @@
   /* ---------------- Connexion ---------------- */
   function login() {
     app.innerHTML = `<div class="login-wrap"><form class="login-card" id="login">
-      <div class="login-logo"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#0f3b36"/><path d="M11 25 24 14l13 11" fill="none" stroke="#d4af6a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 23v11h18V23" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/><path d="M21 34v-6h6v6" fill="none" stroke="#d4af6a" stroke-width="3" stroke-linejoin="round"/></svg></div>
+      <div class="login-logo"><img src="assets/img/logo.png" alt="DJIDONOU SHALOM IMMO"></div>
       <h1>Espace administrateur</h1><p class="muted">${esc(DB.settings().name)}</p>
       <label>Identifiant<input name="user" autocomplete="username" required></label>
       <label>Mot de passe<input name="pass" type="password" autocomplete="current-password" required></label>
@@ -54,7 +54,7 @@
 
   function shell() {
     app.innerHTML = `<div class="a-layout">
-      <aside class="a-side"><a href="index.html" class="a-brand"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#1d5c52"/><path d="M11 25 24 14l13 11" fill="none" stroke="#d4af6a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 23v11h18V23" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg><span><b>SHALOM IMMO</b><small>Administration</small></span></a>
+      <aside class="a-side"><a href="index.html" class="a-brand"><img src="assets/img/logo-light.png" alt="DJIDONOU SHALOM IMMO"><small>Administration</small></a>
         <nav>${VIEWS.map(([k, t, i]) => `<button data-view="${k}">${icon(i)}<span>${t}</span><em data-count="${k}"></em></button>`).join('')}</nav>
         <div class="a-side-foot"><a href="index.html" target="_blank">${icon('eye')}<span>Voir le site</span></a><button id="logout">${icon('logout')}<span>Déconnexion</span></button></div></aside>
       <div class="a-main"><header class="a-top"><button class="a-burger" aria-label="Menu">${icon('menu')}</button><h1 id="a-title"></h1><div class="a-top-actions" id="a-actions"></div></header><div class="a-content" id="a-content"></div></div>

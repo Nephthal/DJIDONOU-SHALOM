@@ -18,8 +18,7 @@
 
   function logo(light) {
     return `<a href="index.html" class="logo ${light ? 'logo-light' : ''}" aria-label="${esc(S().name)} – accueil">
-      <span class="logo-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="currentColor"/><path d="M11 25 24 14l13 11" fill="none" stroke="#d4af6a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 23v11h18V23" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/><path d="M21 34v-6h6v6" fill="none" stroke="#d4af6a" stroke-width="3" stroke-linejoin="round"/></svg></span>
-      <span class="logo-text"><b>DJIDONOU SHALOM</b><i>IMMO</i></span></a>`;
+      <img class="l-dark" src="assets/img/logo.png" alt="${esc(S().name)}" width="160" height="68"><img class="l-light" src="assets/img/logo-light.png" alt="" aria-hidden="true" width="160" height="68"></a>`;
   }
 
   function header() {

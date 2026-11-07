@@ -1,8 +1,8 @@
 /* Service worker — DJIDONOU SHALOM IMMO : fonctionne hors connexion */
-const CACHE = 'dsi-v3';
+const CACHE = 'dsi-v4';
 const CORE = ['./', 'index.html', 'biens.html', 'bien.html', 'services.html', 'contact.html', 'admin.html', 'offline.html',
   'assets/css/style.css', 'assets/css/admin.css', 'assets/js/data.js', 'assets/js/core.js', 'assets/js/site.js', 'assets/js/admin.js', 'assets/js/fx.js',
-  'assets/vendor/leaflet/leaflet.js', 'assets/vendor/leaflet/leaflet.css', 'assets/img/icon.svg', 'assets/img/icon-192.png', 'manifest.webmanifest'];
+  'assets/vendor/leaflet/leaflet.js', 'assets/vendor/leaflet/leaflet.css', 'assets/img/favicon.png', 'assets/img/logo.png', 'assets/img/logo-light.png', 'assets/img/icon-192.png', 'manifest.webmanifest'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', (e) => {

@@ -127,7 +127,7 @@
 
   /* ---------- Images avec repli ---------- */
   const FALLBACK = 'data:image/svg+xml;utf8,' + encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs><linearGradient id="a" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#0f3b36"/><stop offset="1" stop-color="#1d5c52"/></linearGradient></defs><rect width="800" height="600" fill="url(#a)"/><g fill="none" stroke="#d4af6a" stroke-width="10" stroke-linejoin="round" opacity=".85"><path d="M260 330 400 220l140 110"/><path d="M290 310v110h220V310"/><path d="M375 420v-60h50v60"/></g><text x="400" y="490" text-anchor="middle" font-family="Georgia,serif" font-size="30" fill="#f1e6cf" letter-spacing="6">SHALOM IMMO</text></svg>');
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs><linearGradient id="a" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#0f1222"/><stop offset="1" stop-color="#1d2240"/></linearGradient></defs><rect width="800" height="600" fill="url(#a)"/><g fill="none" stroke="#5b6bff" stroke-width="10" stroke-linejoin="round" opacity=".85"><path d="M260 330 400 220l140 110"/><path d="M290 310v110h220V310"/><path d="M375 420v-60h50v60"/></g><text x="400" y="490" text-anchor="middle" font-family="Poppins,Arial,sans-serif" font-weight="600" font-size="30" fill="#e6e8f2" letter-spacing="6">DJIDONOU SHALOM IMMO</text></svg>');
   function onImgError(img) { if (img.dataset.fb) return; img.dataset.fb = 1; img.src = FALLBACK; }
   window.dsiImgErr = onImgError;
   const img = (src, alt, cls = '', extra = '') => `<img src="${esc(src || FALLBACK)}" alt="${esc(alt)}" class="${cls}" loading="lazy" decoding="async" onerror="dsiImgErr(this)" ${extra}>`;
