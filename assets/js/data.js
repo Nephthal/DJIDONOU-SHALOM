@@ -207,11 +207,11 @@
     slogan: "Votre partenaire de confiance pour vos terrains et vos biens immobiliers",
     phone: '+229 01 66 28 45 12',
     whatsapp: '2290166284512',
-    email: 'contact@djidonou-shalom-immo.bj',
-    address: 'Abomey-Calavi, Bénin',
+    email: 'nathhoue2468@gmail.com',
+    address: "Kpota, Abomey-Calavi – sur les pavés menant à l'embarcadère de Ganvié",
     hours: 'Lun – Sam : 8h00 – 18h30',
     facebook: '#', instagram: '#', tiktok: '#',
-    lat: 6.4486, lng: 2.3557,
+    lat: 6.4475, lng: 2.3612,
   };
 
   // Démo : clients, demandes, contrats de gestion locative, visites

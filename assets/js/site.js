@@ -436,7 +436,7 @@
       <a href="tel:${esc(s.phone.replace(/\s/g, ''))}" class="cinfo">${icon('phone')}<span><small>Téléphone</small><b>${esc(s.phone)}</b></span></a>
       <a href="${waLink('Bonjour Shalom Immo, ')}" target="_blank" rel="noopener" class="cinfo">${icon('whatsapp')}<span><small>WhatsApp</small><b>Écrire maintenant</b></span></a>
       <a href="mailto:${esc(s.email)}" class="cinfo">${icon('mail')}<span><small>E-mail</small><b>${esc(s.email)}</b></span></a>
-      <div class="cinfo">${icon('pin')}<span><small>Adresse</small><b>${esc(s.address)}</b></span></div>
+      <a class="cinfo" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}">${icon('pin')}<span><small>Adresse · itinéraire</small><b>${esc(s.address)}</b></span></a>
       <div class="cinfo">${icon('clock')}<span><small>Horaires</small><b>${esc(s.hours)}</b></span></div>`;
     if (window.L) {
       const map = L.map(qs('#contact-map'), { scrollWheelZoom: false }).setView([s.lat, s.lng], 14);

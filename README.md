@@ -35,7 +35,7 @@ Les données (biens, demandes, clients…) sont pour l'instant enregistrées **d
 Pour la mise en ligne réelle, il faut brancher un serveur (par exemple **Supabase** ou **Firebase**) : base de données partagée, vraie connexion sécurisée, stockage des photos. Tout l'accès aux données passe par l'objet `DB` de `assets/js/core.js` pour faciliter ce branchement.
 
 ## À personnaliser avant la mise en ligne
-- Téléphone, WhatsApp, e-mail, adresse et réseaux sociaux (dans *Paramètres* ou dans `assets/js/data.js`). Le téléphone et le WhatsApp sont réglés sur le +229 01 66 28 45 12 ; l'e-mail et l'adresse sont encore à confirmer.
+- Téléphone, WhatsApp, e-mail, adresse et réseaux sociaux (dans *Paramètres* ou dans `assets/js/data.js`). Réglés : téléphone et WhatsApp +229 01 66 28 45 12, e-mail nathhoue2468@gmail.com, adresse à Kpota (Abomey-Calavi). Restent à fournir : les liens des réseaux sociaux.
 - Les biens de démonstration et leurs photos (images libres de droits Unsplash), à remplacer par les vraies parcelles
 - Les chiffres clés de l'accueil (années d'expérience, etc.) et les témoignages
 
