@@ -23,6 +23,11 @@
   }
 
   let state = load();
+  // Remplace l'ancien numéro fictif par le vrai numéro chez les visiteurs ayant déjà ouvert le site
+  if (state.settings && (state.settings.whatsapp === '22901000000000' || state.settings.phone === '+229 01 00 00 00 00')) {
+    state.settings.whatsapp = seed.settings.whatsapp; state.settings.phone = seed.settings.phone;
+    safeSet(KEY, JSON.stringify(state));
+  }
   const save = () => {
     if (!safeSet(KEY, JSON.stringify(state))) {
       alert("Stockage plein : réduisez la taille ou le nombre des photos importées.");
