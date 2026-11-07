@@ -26,46 +26,64 @@
     const current = location.pathname.split('/').pop() || 'index.html';
     const params = new URLSearchParams(location.search);
     const activeKey = current === 'biens.html'
-      ? (params.get('category') === 'parcelle' ? 'parcelles' : params.get('transaction') === 'location' ? 'louer' : 'acheter')
-      : current.replace('.html', '').replace('index', 'home').replace('bien', 'acheter');
+      ? (params.get('fav') ? 'favoris' : params.get('category') === 'parcelle' ? 'parcelles' : params.get('transaction') === 'location' ? 'louer' : 'acheter')
+      : current.replace('.html', '').replace('index', 'home').replace('bien', 'acheter') || 'home';
     const links = NAV.map(([h, t, k]) => `<a href="${h}" class="${k === activeKey ? 'active' : ''}">${t}</a>`).join('');
+    const transparent = page !== 'detail';
     const el = document.createElement('header');
-    el.className = 'site-header' + (page === 'home' ? ' is-transparent' : '');
-    el.innerHTML = `<div class="topbar"><div class="container topbar-in">
-        <span>${icon('pin')} ${esc(S().address)}</span><span class="hide-sm">${icon('clock')} ${esc(S().hours)}</span>
-        <span class="topbar-right"><a href="tel:${esc(S().phone.replace(/\s/g, ''))}">${icon('phone')} ${esc(S().phone)}</a><a href="mailto:${esc(S().email)}" class="hide-sm">${icon('mail')} ${esc(S().email)}</a></span>
-      </div></div>
-      <div class="container nav-in">
+    el.className = 'site-header' + (transparent ? ' is-transparent' : ' solid');
+    el.innerHTML = `<div class="container nav-in">
         ${logo()}
         <nav class="main-nav" aria-label="Navigation principale">${links}</nav>
         <div class="nav-actions">
           <a href="biens.html?fav=1" class="icon-btn" aria-label="Mes favoris">${icon('heart')}<span class="badge" data-fav-count hidden>0</span></a>
-          <a href="services.html#confier" class="btn btn-gold btn-sm hide-md">Confier mon bien</a>
+          <a href="services.html#confier" class="btn btn-gold btn-sm hide-md magnetic">Confier mon bien</a>
           <button class="icon-btn burger" aria-label="Ouvrir le menu" aria-expanded="false">${icon('menu')}</button>
         </div>
-      </div>
-      <div class="mobile-nav" hidden>${links}<a href="services.html#confier" class="btn btn-gold">Confier mon bien</a><a href="admin.html" class="muted-link">Espace administrateur</a></div>`;
+      </div>`;
     document.body.prepend(el);
-    const burger = qs('.burger', el), mnav = qs('.mobile-nav', el);
+    const mnav = document.createElement('div');
+    mnav.className = 'mobile-nav';
+    mnav.innerHTML = `${links}<a href="services.html#confier" class="btn btn-gold">Confier mon bien</a>
+      <div class="mobile-nav-foot"><a href="tel:${esc(S().phone.replace(/\s/g, ''))}">${icon('phone')} ${esc(S().phone)}</a><a href="mailto:${esc(S().email)}">${icon('mail')} ${esc(S().email)}</a><a href="admin.html">${icon('settings')} Espace administrateur</a></div>`;
+    document.body.appendChild(mnav);
+    const burger = qs('.burger', el);
     burger.addEventListener('click', () => {
-      const open = mnav.hidden; mnav.hidden = !open; burger.setAttribute('aria-expanded', open);
-      burger.innerHTML = icon(open ? 'close' : 'menu'); document.body.classList.toggle('nav-open', open);
+      const open = !document.body.classList.contains('nav-open');
+      document.body.classList.toggle('nav-open', open); burger.setAttribute('aria-expanded', open); burger.innerHTML = icon(open ? 'close' : 'menu');
     });
-    const onScroll = () => el.classList.toggle('scrolled', window.scrollY > 40);
+    let last = 0;
+    const onScroll = () => {
+      const y = window.scrollY;
+      el.classList.toggle('scrolled', y > 40);
+      el.classList.toggle('hide', y > 500 && y > last + 4 && !document.body.classList.contains('nav-open'));
+      if (y < last - 4 || y < 500) el.classList.remove('hide');
+      last = y;
+    };
     window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+    // Barre d'onglets mobile (style application)
+    const tabs = [['index.html', 'home', 'Accueil', 'home'], ['biens.html?transaction=vente&category=parcelle', 'map', 'Parcelles', 'parcelles'], ['biens.html?transaction=location', 'key', 'Louer', 'louer'], ['biens.html?fav=1', 'heart', 'Favoris', 'favoris'], ['contact.html', 'phone', 'Contact', 'contact']];
+    const tb = document.createElement('nav');
+    tb.className = 'tabbar'; tb.setAttribute('aria-label', 'Navigation rapide');
+    tb.innerHTML = tabs.map(([h, i, t, k]) => `<a href="${h}" class="${k === activeKey || (k === 'home' && activeKey === 'acheter' && current === 'index.html') ? 'active' : ''}">${icon(i)}<span>${t}</span>${k === 'favoris' ? '<span class="badge" data-fav-count hidden>0</span>' : ''}</a>`).join('');
+    document.body.appendChild(tb);
   }
 
   function footer() {
     const s = S();
     const f = document.createElement('footer');
     f.className = 'site-footer';
-    f.innerHTML = `<div class="container footer-grid">
+    f.innerHTML = `<div class="footer-cta"><div class="container"><h2 class="reveal">Un projet immobilier ? <span class="gold-text">Parlons-en aujourd'hui.</span></h2>
+        <div class="btns reveal" style="--d:120ms"><a class="btn btn-gold magnetic" href="contact.html">Prendre rendez-vous ${icon('arrow', 'ico-arrow')}</a><a class="btn btn-ghost-light" href="${waLink('Bonjour Shalom Immo, ')}" target="_blank" rel="noopener">${icon('whatsapp')} WhatsApp</a></div></div></div>
+      <div class="container footer-grid">
         <div>${logo(true)}<p class="footer-about">${esc(s.slogan)}. Gestion locative, vente de parcelles, accompagnement à l'achat et à la vente de biens immobiliers au Bénin.</p>
           <div class="socials"><a href="${esc(s.facebook)}" aria-label="Facebook">f</a><a href="${esc(s.instagram)}" aria-label="Instagram">ig</a><a href="${esc(s.tiktok)}" aria-label="TikTok">tt</a></div></div>
         <div><h4>Nos biens</h4><a href="biens.html?transaction=vente&category=parcelle">Parcelles à vendre</a><a href="biens.html?transaction=vente&category=maison">Maisons & villas</a><a href="biens.html?transaction=location">Locations</a><a href="biens.html?transaction=location&category=bureau">Bureaux & commerces</a></div>
         <div><h4>Services</h4><a href="services.html#gestion">Gestion locative</a><a href="services.html#foncier">Sécurisation foncière</a><a href="services.html#accompagnement">Achat & vente accompagnés</a><a href="services.html#confier">Faire estimer mon bien</a></div>
-        <div><h4>Contact</h4><a href="tel:${esc(s.phone.replace(/\s/g, ''))}">${icon('phone')} ${esc(s.phone)}</a><a href="${waLink('Bonjour Shalom Immo, ')}" target="_blank" rel="noopener">${icon('whatsapp')} WhatsApp</a><a href="mailto:${esc(s.email)}">${icon('mail')} ${esc(s.email)}</a><span>${icon('pin')} ${esc(s.address)}</span></div>
+        <div><h4>Contact</h4><a href="tel:${esc(s.phone.replace(/\s/g, ''))}">${icon('phone')} ${esc(s.phone)}</a><a href="${waLink('Bonjour Shalom Immo, ')}" target="_blank" rel="noopener">${icon('whatsapp')} WhatsApp</a><a href="mailto:${esc(s.email)}">${icon('mail')} ${esc(s.email)}</a><span>${icon('pin')} ${esc(s.address)}</span><span>${icon('clock')} ${esc(s.hours)}</span></div>
       </div>
+      <div class="footer-word" aria-hidden="true">SHALOM IMMO</div>
       <div class="container footer-bottom"><span>© ${new Date().getFullYear()} ${esc(s.name)}. Tous droits réservés.</span><span><a href="admin.html">Espace administrateur</a> · <button class="linklike" data-install hidden>Installer l'application</button></span></div>`;
     document.body.appendChild(f);
 
@@ -86,15 +104,15 @@
       p.status !== 'disponible' ? `<span class="tag tag-dark">${esc(STATUS[p.status] || p.status)}</span>` : '',
       p.featured && p.status === 'disponible' ? `<span class="tag tag-gold">${icon('star')} Coup de cœur</span>` : '',
     ].join('');
-    return `<article class="card prop-card ${opts.horizontal ? 'horizontal' : ''} ${p.status === 'vendu' || p.status === 'loué' ? 'is-closed' : ''}" data-id="${esc(p.id)}">
+    return `<article class="card prop-card tilt ${opts.horizontal ? 'horizontal' : ''} ${p.status === 'vendu' || p.status === 'loué' ? 'is-closed' : ''}" data-id="${esc(p.id)}">
       <a href="bien.html?id=${encodeURIComponent(p.id)}" class="prop-media">
         ${img(p.images && p.images[0], p.title, 'prop-img')}
         <div class="prop-badges">${badges}</div>
+        <div class="prop-price-tag"><span>${esc(CATEGORIES[p.category] || '')}</span>${priceLabel(p)}</div>
         ${isParcel ? `<div class="prop-plan-mini">${parcelPlan(p, { cls: 'mini' })}</div>` : ''}
       </a>
       <button class="fav-btn ${isFav(p.id) ? 'on' : ''}" data-fav="${esc(p.id)}" aria-label="Ajouter aux favoris">${icon('heart')}</button>
       <div class="prop-body">
-        <div class="prop-price">${priceLabel(p)}</div>
         <h3 class="prop-title"><a href="bien.html?id=${encodeURIComponent(p.id)}">${esc(p.title)}</a></h3>
         <p class="prop-loc">${icon('pin')} ${esc(p.district)}, ${esc(p.city)}</p>
         <ul class="prop-meta">${metas.filter(Boolean).map(([i, t]) => `<li>${i}${esc(t)}</li>`).join('')}</ul>
@@ -217,29 +235,33 @@
 
     // Catégories rapides
     const cnt = (f) => avail.filter(f).length;
+    const I = window.DSI_SEED.IMG;
     qs('#quick-cats').innerHTML = [
-      ['biens.html?transaction=vente&category=parcelle', 'map', 'Parcelles', cnt((p) => p.category === 'parcelle')],
-      ['biens.html?transaction=vente&category=maison', 'home', 'Maisons & villas', cnt((p) => p.category === 'maison' && p.transaction === 'vente')],
-      ['biens.html?transaction=location&category=appartement', 'key', 'Appartements', cnt((p) => p.category === 'appartement')],
-      ['biens.html?transaction=location&category=bureau', 'build', 'Bureaux', cnt((p) => p.category === 'bureau')],
-    ].map(([h, i, t, n]) => `<a href="${h}" class="qcat">${icon(i)}<b>${t}</b><span>${n} disponible${n > 1 ? 's' : ''}</span></a>`).join('');
+      ['biens.html?transaction=vente&category=parcelle', 'map', 'Parcelles', cnt((p) => p.category === 'parcelle'), I.terrain1],
+      ['biens.html?transaction=vente&category=maison', 'home', 'Maisons & villas', cnt((p) => p.category === 'maison' && p.transaction === 'vente'), I.villa2],
+      ['biens.html?transaction=location&category=appartement', 'key', 'Appartements', cnt((p) => p.category === 'appartement'), I.salon4],
+      ['biens.html?transaction=location&category=bureau', 'build', 'Bureaux', cnt((p) => p.category === 'bureau'), I.bureau1],
+    ].map(([h, i, t, n, src], k) => `<a href="${h}" class="qcat reveal zoom" style="--d:${k * 90}ms">${img(src, t)}<span class="qcat-ico">${icon(i)}</span><span class="qcat-go">${icon('arrow')}</span><b>${t}</b><span>${n} disponible${n > 1 ? 's' : ''}</span></a>`).join('');
 
     // Services
-    qs('#services-grid').innerHTML = DB.all('services').map((sv, i) => `<div class="service reveal" style="--d:${i * 70}ms"><div class="service-ico">${icon(sv.icon)}</div><h3>${esc(sv.title)}</h3><p>${esc(sv.text)}</p><ul>${sv.points.map((pt) => `<li>${icon('check')}${esc(pt)}</li>`).join('')}</ul></div>`).join('');
+    qs('#services-grid').innerHTML = DB.all('services').map((sv, i) => `<div class="service spot reveal" style="--d:${i * 80}ms"><span class="service-num">0${i + 1}</span><div class="service-ico">${icon(sv.icon)}</div><h3>${esc(sv.title)}</h3><p>${esc(sv.text)}</p><ul>${sv.points.map((pt) => `<li>${icon('check')}${esc(pt)}</li>`).join('')}</ul></div>`).join('');
 
     // Parcelles en vedette
-    const parcels = all.filter((p) => p.category === 'parcelle' && p.transaction === 'vente').sort((a, b) => (b.featured - a.featured) || (a.status === 'disponible' ? -1 : 1)).slice(0, 6);
+    const parcels = all.filter((p) => p.category === 'parcelle' && p.transaction === 'vente').sort((a, b) => (a.status === 'disponible' ? 0 : 1) - (b.status === 'disponible' ? 0 : 1) || (b.featured - a.featured));
     qs('#featured-parcels').innerHTML = parcels.map((p) => card(p)).join('');
-    const rentals = all.filter((p) => p.transaction === 'location').sort((a, b) => (a.status === 'disponible' ? -1 : 1) - (b.status === 'disponible' ? -1 : 1)).slice(0, 4);
+    const rentals = all.filter((p) => p.transaction === 'location').sort((a, b) => (a.status === 'disponible' ? 0 : 1) - (b.status === 'disponible' ? 0 : 1));
     qs('#featured-rentals').innerHTML = rentals.map((p) => card(p)).join('');
     const houses = all.filter((p) => p.transaction === 'vente' && p.category !== 'parcelle').slice(0, 3);
-    qs('#featured-houses').innerHTML = houses.map((p) => card(p)).join('');
+    qs('#featured-houses').innerHTML = houses.map((p, k) => `<div class="reveal" style="--d:${k * 100}ms">${card(p)}</div>`).join('');
+
+    // Villes
+    const cp = qs('#city-pills'); if (cp) cp.innerHTML = cities().map((c) => `<a href="biens.html?city=${encodeURIComponent(c)}">${esc(c)}</a>`).join('');
 
     // Carte
     makeMap(qs('#home-map'), all.filter((p) => p.status !== 'vendu'));
 
     // Témoignages
-    qs('#testimonials').innerHTML = DB.all('testimonials').map((t) => `<figure class="testi reveal"><div class="stars">${icon('star').repeat(5)}</div><blockquote>« ${esc(t.text)} »</blockquote><figcaption><span class="avatar">${esc(t.name[0])}</span><span><b>${esc(t.name)}</b><small>${esc(t.role)}</small></span></figcaption></figure>`).join('');
+    qs('#testimonials').innerHTML = DB.all('testimonials').map((t, k) => `<figure class="testi reveal" style="--d:${k * 100}ms"><div class="stars">${icon('star').repeat(5)}</div><blockquote>${esc(t.text)}</blockquote><figcaption><span class="avatar">${esc(t.name[0])}</span><span><b>${esc(t.name)}</b><small>${esc(t.role)}</small></span></figcaption></figure>`).join('');
 
     qsa('.faq-q').forEach((b) => b.addEventListener('click', () => b.parentElement.classList.toggle('open')));
   }
@@ -402,7 +424,7 @@
   function services() {
     qs('#services-detail').innerHTML = DB.all('services').map((sv, i) => {
       const anchors = ['gestion', 'parcelles', 'accompagnement', 'foncier', 'recherche', 'construction'];
-      return `<article class="svc-row reveal" id="${anchors[i] || 's' + i}"><div class="svc-num">0${i + 1}</div><div class="service-ico">${icon(sv.icon)}</div><div><h3>${esc(sv.title)}</h3><p>${esc(sv.text)}</p><ul class="checklist inline">${sv.points.map((pt) => `<li>${icon('check')}${esc(pt)}</li>`).join('')}</ul></div></article>`;
+      return `<article class="svc-row reveal from-left" id="${anchors[i] || 's' + i}"><div class="svc-num">0${i + 1}</div><div class="service-ico">${icon(sv.icon)}</div><div><h3>${esc(sv.title)}</h3><p>${esc(sv.text)}</p><ul class="checklist inline">${sv.points.map((pt) => `<li>${icon('check')}${esc(pt)}</li>`).join('')}</ul></div></article>`;
     }).join('');
   }
 

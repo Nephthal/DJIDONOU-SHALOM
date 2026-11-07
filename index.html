@@ -5,26 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>DJIDONOU SHALOM IMMO – Parcelles, ventes et gestion locative au Bénin</title>
   <meta name="description" content="Agence immobilière au Bénin : vente de parcelles vérifiées, maisons et villas, locations, gestion locative et accompagnement à l'achat et à la vente.">
-  <meta name="theme-color" content="#0f3b36">
+  <meta name="theme-color" content="#061f1b">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/img/icon-192.png">
   <meta property="og:title" content="DJIDONOU SHALOM IMMO">
   <meta property="og:description" content="Parcelles vérifiées, ventes, locations et gestion locative au Bénin.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=70">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=70">
   <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body data-page="home">
 
+<div id="preloader" aria-hidden="true">
+  <div class="pre-in">
+    <svg viewBox="0 0 48 48"><path d="M8 25 24 11l16 14" fill="none" stroke="#e2bd72" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 22v15h22V22" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/><path d="M20.5 37v-8h7v8" fill="none" stroke="#e2bd72" stroke-width="2.4" stroke-linejoin="round"/></svg>
+    <div class="pre-name">DJIDONOU SHALOM <b>IMMO</b></div>
+  </div>
+</div>
+
 <section class="hero">
-  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=70" alt="" onerror="this.style.display='none'"></div>
+  <div class="hero-slides">
+    <div class="slide active" data-caption="Villa contemporaine · Haie Vive, Cotonou"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=70" alt="" onerror="dsiImgErr(this)"></div>
+    <div class="slide" data-caption="Parcelles vérifiées · Abomey-Calavi"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=70" alt="" loading="lazy" onerror="dsiImgErr(this)"></div>
+    <div class="slide" data-caption="Appartements meublés · Cotonou"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=70" alt="" loading="lazy" onerror="dsiImgErr(this)"></div>
+    <div class="slide" data-caption="Résidences avec piscine · Fidjrossè"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2000&q=70" alt="" loading="lazy" onerror="dsiImgErr(this)"></div>
+  </div>
   <div class="container hero-in">
-    <span class="eyebrow">Agence immobilière · Bénin</span>
-    <h1>Votre terre, votre maison, <em>en toute sérénité.</em></h1>
-    <p class="hero-sub" id="hero-slogan"></p>
-    <form class="search-box" id="hero-search" role="search">
+    <span class="eyebrow fade-in" style="--d:.2s">Agence immobilière · Bénin</span>
+    <h1 data-split>Trouvez votre <span class="rotator" data-rotate="parcelle|maison|appartement|avenir"></span><br>en toute sérénité.</h1>
+    <p class="hero-sub fade-in" style="--d:.9s" id="hero-slogan"></p>
+    <form class="search-box fade-in" style="--d:1.1s" id="hero-search" role="search">
       <div class="search-tabs">
         <button type="button" class="active" data-t="vente">Acheter</button>
         <button type="button" data-t="location">Louer</button>
@@ -34,22 +48,46 @@
         <div class="sfield"><label for="hs-cat">Type de bien</label>
           <select id="hs-cat" name="category"><option value="">Tous les biens</option><option value="parcelle">Parcelle</option><option value="maison">Maison / Villa</option><option value="appartement">Appartement</option><option value="bureau">Bureau / Commerce</option></select></div>
         <div class="sfield"><label for="hs-city">Localisation</label><select id="hs-city" name="city"><option value="">Toutes les villes</option></select></div>
-        <div class="sfield"><label for="hs-budget">Budget</label>
+        <div class="sfield opt"><label for="hs-budget">Budget</label>
           <select id="hs-budget" name="priceMax"><option value="">Budget max</option><option value="5000000">5 M FCFA</option><option value="10000000">10 M FCFA</option><option value="50000000">50 M FCFA</option><option value="200000000">200 M FCFA</option></select></div>
-        <div class="sfield"><label for="hs-q">Mot-clé</label><input id="hs-q" name="q" placeholder="Quartier, réf…"></div>
-        <button class="btn btn-gold"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Rechercher</button>
+        <div class="sfield opt"><label for="hs-q">Mot-clé</label><input id="hs-q" name="q" placeholder="Quartier, réf…"></div>
+        <button class="btn btn-gold magnetic"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Rechercher</button>
       </div>
     </form>
-    <div class="hero-trust">
-      <span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg> Documents fonciers vérifiés</span>
-      <span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Paiement échelonné</span>
-      <span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg> Diaspora accompagnée</span>
-    </div>
+  </div>
+  <div class="hero-side fade-in" style="--d:1.4s">
+    <div class="glass-card"><span class="gc-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><span><b>Documents vérifiés</b><small>Contrôle ANDF avant chaque vente</small></span></div>
+    <div class="glass-card"><span class="gc-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span><b>Paiement échelonné</b><small>Jusqu'à 36 mois sans banque</small></span></div>
+  </div>
+  <div class="hero-dots"><button class="active" aria-label="Image 1"></button><button aria-label="Image 2"></button><button aria-label="Image 3"></button><button aria-label="Image 4"></button><span class="hero-caption show">Villa contemporaine · Haie Vive, Cotonou</span></div>
+  <div class="scroll-cue" aria-hidden="true"></div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="marquee-track">
+  <span>Cotonou <i></i> <em>Abomey-Calavi</em> <i></i> Ouidah <i></i> <em>Porto-Novo</em> <i></i> Sèmè-Podji <i></i> <em>Allada</em> <i></i> Glo-Djigbé <i></i> <em>Fidjrossè</em> <i></i> Haie Vive <i></i> <em>Akpakpa</em> <i></i></span>
+  <span>Cotonou <i></i> <em>Abomey-Calavi</em> <i></i> Ouidah <i></i> <em>Porto-Novo</em> <i></i> Sèmè-Podji <i></i> <em>Allada</em> <i></i> Glo-Djigbé <i></i> <em>Fidjrossè</em> <i></i> Haie Vive <i></i> <em>Akpakpa</em> <i></i></span>
+</div></div>
+
+<section class="section-sm" style="padding-top:80px">
+  <div class="container">
+    <div class="sec-head"><div class="reveal"><span class="eyebrow">Que cherchez-vous ?</span><h2>Explorez par catégorie</h2></div></div>
+    <div class="quick-cats" id="quick-cats"></div>
   </div>
 </section>
 
-<div class="container stats">
-  <div class="stats-in">
+<section class="section-sm">
+  <div class="container carousel" data-carousel>
+    <div class="sec-head">
+      <div class="reveal"><span class="eyebrow">Parcelles disponibles</span><h2>Des terrains vérifiés, <span class="gold-text">prêts à bâtir</span></h2><p class="muted">Chaque parcelle est contrôlée par notre équipe : documents, bornage et accès. Vous achetez l'esprit tranquille.</p></div>
+      <div class="reveal from-right"><div class="car-nav"><button class="car-prev" aria-label="Précédent"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button><button class="car-next" aria-label="Suivant"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
+    </div>
+    <div class="car-track" id="featured-parcels"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap"><div class="car-progress" style="flex:1"><i></i></div><a href="biens.html?transaction=vente&category=parcelle" class="link-arrow">Toutes les parcelles <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+</section>
+
+<div class="container stats" style="margin-top:40px">
+  <div class="stats-in reveal">
     <div class="stat"><b data-count="0" id="stat-parcels" data-suffix="+">0</b><span>Parcelles vendues</span></div>
     <div class="stat"><b data-count="0" id="stat-rentals" data-suffix="+">0</b><span>Biens en gestion</span></div>
     <div class="stat"><b data-count="98" data-suffix="%">0</b><span>Clients satisfaits</span></div>
@@ -57,118 +95,109 @@
   </div>
 </div>
 
-<section class="section-sm">
-  <div class="container"><div class="quick-cats" id="quick-cats"></div></div>
-</section>
-
-<section class="section-sm">
+<section class="section dark" style="margin-top:110px">
+  <span class="big-num" style="right:-2%;top:20px" aria-hidden="true">06</span>
   <div class="container">
-    <div class="sec-head reveal">
-      <div><span class="eyebrow">Parcelles disponibles</span><h2>Des terrains vérifiés, prêts à bâtir</h2><p class="muted">Chaque parcelle est contrôlée par notre équipe : documents, bornage et accès. Vous achetez l'esprit tranquille.</p></div>
-      <a href="biens.html?transaction=vente&category=parcelle" class="link-arrow">Toutes les parcelles <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-    <div class="grid-cards" id="featured-parcels"></div>
-  </div>
-</section>
-
-<section class="section alt">
-  <div class="container">
-    <div class="sec-center reveal"><span class="eyebrow">Nos services</span><h2>Un accompagnement complet, de la parcelle aux clés</h2><p class="muted">Gestion locative, vente de parcelles, achat et vente accompagnés : une seule agence pour tous vos projets immobiliers.</p></div>
+    <div class="sec-center reveal"><span class="eyebrow">Nos services</span><h2>Un accompagnement complet, <span class="gold-text">de la parcelle aux clés</span></h2><p class="muted">Gestion locative, vente de parcelles, achat et vente accompagnés : une seule agence pour tous vos projets immobiliers.</p></div>
     <div class="services-grid" id="services-grid"></div>
   </div>
 </section>
 
 <section class="section">
   <div class="container map-split">
-    <div class="reveal">
+    <div class="reveal from-left">
       <span class="eyebrow">Situation géographique</span>
-      <h2>Explorez nos biens sur la carte</h2>
-      <p class="muted">Cotonou, Abomey-Calavi, Ouidah, Sèmè-Podji, Porto-Novo, Allada… Repérez en un coup d'œil les biens proches de votre travail, de la plage ou des grands axes.</p>
+      <h2>Nos biens, <span class="gold-text">sur la carte</span></h2>
+      <p class="muted">Repérez en un coup d'œil les biens proches de votre travail, de la plage ou des grands axes. Touchez un prix pour voir le bien.</p>
       <div class="legend"><span><i></i> Biens à vendre</span><span><i class="loc"></i> Biens à louer</span></div>
-      <a href="biens.html" class="btn btn-primary">Rechercher un bien</a>
+      <div class="city-pills" id="city-pills"></div>
+      <a href="biens.html" class="btn btn-primary magnetic">Rechercher un bien <svg class="ico ico-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
-    <div id="home-map" class="map map-lg reveal"></div>
+    <div id="home-map" class="map map-lg reveal zoom"></div>
   </div>
 </section>
 
 <section class="section alt">
-  <div class="container">
-    <div class="sec-head reveal">
-      <div><span class="eyebrow">Gestion locative</span><h2>Logements et bureaux à louer</h2><p class="muted">Des biens confiés par leurs propriétaires et gérés par notre agence : visites, contrats et suivi assurés.</p></div>
-      <a href="biens.html?transaction=location" class="link-arrow">Toutes les locations <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  <div class="container carousel" data-carousel="auto">
+    <div class="sec-head">
+      <div class="reveal"><span class="eyebrow">Gestion locative</span><h2>Logements & bureaux <span class="gold-text">à louer</span></h2><p class="muted">Des biens confiés par leurs propriétaires et gérés par notre agence : visites, contrats et suivi assurés.</p></div>
+      <div class="reveal from-right"><div class="car-nav"><button class="car-prev" aria-label="Précédent"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button><button class="car-next" aria-label="Suivant"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
     </div>
-    <div class="grid-cards four" id="featured-rentals"></div>
+    <div class="car-track four" id="featured-rentals"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap"><div class="car-progress" style="flex:1"><i></i></div><a href="biens.html?transaction=location" class="link-arrow">Toutes les locations <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   </div>
 </section>
 
 <section class="section dark">
   <div class="container">
-    <div class="sec-center reveal"><span class="eyebrow">Acheter sans risque</span><h2>Acheter une parcelle au Bénin, en 4 étapes sûres</h2><p class="muted">Notre méthode protège votre argent contre les litiges fonciers.</p></div>
+    <div class="sec-center reveal"><span class="eyebrow">Acheter sans risque</span><h2>Votre parcelle en <span class="gold-text">4 étapes sûres</span></h2><p class="muted">Notre méthode protège votre argent contre les litiges fonciers.</p></div>
     <div class="steps">
       <div class="step reveal"><h3>Choix & visite</h3><p>Vous choisissez une parcelle et la visitez avec nous, sur place ou en vidéo si vous êtes à l'étranger.</p></div>
-      <div class="step reveal" style="--d:80ms"><h3>Vérification</h3><p>Contrôle des documents à l'ANDF, à la mairie et auprès des voisins. Bornage contradictoire.</p></div>
-      <div class="step reveal" style="--d:160ms"><h3>Signature</h3><p>Convention de vente signée chez le notaire, paiement comptant ou échelonné.</p></div>
-      <div class="step reveal" style="--d:240ms"><h3>Sécurisation</h3><p>Mutation à votre nom et obtention du Certificat de Propriété Foncière (CPF).</p></div>
+      <div class="step reveal" style="--d:120ms"><h3>Vérification</h3><p>Contrôle des documents à l'ANDF, à la mairie et auprès des voisins. Bornage contradictoire.</p></div>
+      <div class="step reveal" style="--d:240ms"><h3>Signature</h3><p>Convention de vente signée chez le notaire, paiement comptant ou échelonné.</p></div>
+      <div class="step reveal" style="--d:360ms"><h3>Sécurisation</h3><p>Mutation à votre nom et obtention du Certificat de Propriété Foncière (CPF).</p></div>
     </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="sec-head reveal"><div><span class="eyebrow">Maisons & villas</span><h2>Biens bâtis à vendre</h2></div><a href="biens.html?transaction=vente&category=maison" class="link-arrow">Voir tout <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    <div class="sec-head"><div class="reveal"><span class="eyebrow">Maisons & villas</span><h2>Biens bâtis <span class="gold-text">à vendre</span></h2></div><a href="biens.html?transaction=vente&category=maison" class="link-arrow reveal">Voir tout <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
     <div class="grid-cards" id="featured-houses"></div>
   </div>
 </section>
 
 <section class="section alt" id="simulator">
   <div class="container split">
-    <div class="reveal"><span class="eyebrow">Simulateur</span><h2>Votre parcelle, payée à votre rythme</h2><p class="muted">La plupart de nos parcelles peuvent être payées en plusieurs fois, sans intérêts. Calculez votre apport et vos mensualités.</p>
+    <div class="reveal from-left"><span class="eyebrow">Simulateur</span><h2>Votre parcelle, <span class="gold-text">payée à votre rythme</span></h2><p class="muted">La plupart de nos parcelles peuvent être payées en plusieurs fois, sans intérêts. Calculez votre apport et vos mensualités en temps réel.</p>
       <ul class="ticks"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5L20 7"/></svg><span><b>Sans banque</b>Un échéancier signé directement avec l'agence.</span></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5L20 7"/></svg><span><b>Jusqu'à 36 mois</b>Selon la parcelle et votre apport initial.</span></li></ul>
     </div>
-    <div class="sim-card reveal"><div data-simulator></div></div>
+    <div class="sim-card reveal from-right"><div data-simulator></div></div>
   </div>
 </section>
 
 <section class="section">
   <div class="container split">
-    <div class="split-media reveal">
-      <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1000&q=70" alt="Conseillère immobilière remettant des clés" loading="lazy" onerror="dsiImgErr(this)">
-      <div class="float-card"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><div><b>Diaspora</b><span>Achetez au pays depuis l'étranger, en toute confiance.</span></div></div>
+    <div class="split-media reveal from-left">
+      <div class="img-frame"><img data-parallax="0.08" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1100&q=70" alt="Remise des clés d'un bien immobilier" loading="lazy" onerror="dsiImgErr(this)"></div>
+      <div class="img-small"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=70" alt="" loading="lazy" onerror="dsiImgErr(this)"></div>
+      <div class="float-card"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><div><b>Diaspora</b><span>Achetez au pays depuis l'étranger, en toute confiance.</span></div></div>
     </div>
-    <div class="reveal">
+    <div class="reveal from-right">
       <span class="eyebrow">Pourquoi nous choisir</span>
-      <h2>La confiance, au cœur de chaque transaction</h2>
+      <h2>La confiance, <span class="gold-text">au cœur de chaque transaction</span></h2>
       <p class="muted">« Shalom » signifie paix. C'est ce que nous voulons vous apporter : un projet immobilier serein, transparent et sans mauvaise surprise.</p>
       <ul class="ticks">
         <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5L20 7"/></svg><span><b>Transparence totale</b>Prix clairs, documents montrés avant tout paiement.</span></li>
         <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5L20 7"/></svg><span><b>Suivi à distance</b>Photos, vidéos et appels vidéo pour nos clients de la diaspora.</span></li>
         <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5L20 7"/></svg><span><b>Réseau de confiance</b>Notaires, géomètres, architectes et artisans sélectionnés.</span></li>
       </ul>
-      <a href="contact.html" class="btn btn-primary">Parler à un conseiller</a>
+      <a href="contact.html" class="btn btn-primary magnetic">Parler à un conseiller <svg class="ico ico-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
 
 <section class="section alt">
   <div class="container">
-    <div class="sec-center reveal"><span class="eyebrow">Témoignages</span><h2>Ils nous ont fait confiance</h2></div>
+    <div class="sec-center reveal"><span class="eyebrow">Témoignages</span><h2>Ils nous ont <span class="gold-text">fait confiance</span></h2></div>
     <div class="testis" id="testimonials"></div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="cta-band reveal">
-      <div><span class="eyebrow">Propriétaires</span><h2>Confiez-nous votre bien, recevez vos loyers sans souci</h2><p>Location, encaissement, entretien, rapport mensuel : nous gérons tout. Vous recevez votre loyer à date fixe.</p></div>
-      <div class="btns"><a href="services.html#confier" class="btn btn-gold">Confier mon bien</a><a href="services.html#confier" class="btn btn-ghost-light">Estimation gratuite</a></div>
+    <div class="cta-band reveal zoom">
+      <div class="cta-bg"><img data-parallax="0.12" src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1800&q=70" alt="" loading="lazy" onerror="dsiImgErr(this)"></div>
+      <div><span class="eyebrow">Propriétaires</span><h2>Confiez-nous votre bien, <span class="gold-text">recevez vos loyers sans souci</span></h2><p>Location, encaissement, entretien, rapport mensuel : nous gérons tout. Vous recevez votre loyer à date fixe.</p></div>
+      <div class="btns"><a href="services.html#confier" class="btn btn-gold magnetic">Confier mon bien</a><a href="services.html#confier" class="btn btn-ghost-light">Estimation gratuite</a></div>
     </div>
   </div>
 </section>
 
 <section class="section alt">
   <div class="container">
-    <div class="sec-center reveal"><span class="eyebrow">Questions fréquentes</span><h2>Vous vous posez des questions ?</h2></div>
-    <div class="faq">
+    <div class="sec-center reveal"><span class="eyebrow">Questions fréquentes</span><h2>Vous vous posez <span class="gold-text">des questions ?</span></h2></div>
+    <div class="faq reveal">
       <div class="faq-item"><button class="faq-q">Quelle différence entre Titre Foncier, CPF, ADC et convention de vente ?</button><div class="faq-a"><p>Le Certificat de Propriété Foncière (CPF) et l'ancien Titre Foncier sont les documents qui prouvent définitivement la propriété. L'Attestation de Détention Coutumière (ADC) et la convention de vente sont des étapes intermédiaires. Nous vous accompagnons pour transformer ces documents en CPF.</p></div></div>
       <div class="faq-item"><button class="faq-q">Puis-je acheter une parcelle depuis l'étranger ?</button><div class="faq-a"><p>Oui. Nous organisons des visites en vidéo, vous envoyons les documents scannés pour vérification, et la signature peut se faire par procuration chez le notaire.</p></div></div>
       <div class="faq-item"><button class="faq-q">Comment fonctionne le paiement échelonné ?</button><div class="faq-a"><p>Vous versez un apport (souvent 30 %), puis le reste en mensualités fixes sur 3 à 36 mois selon la parcelle. Un échéancier est signé dans la convention de vente.</p></div></div>
@@ -182,5 +211,6 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/core.js"></script>
 <script src="assets/js/site.js"></script>
+<script src="assets/js/fx.js"></script>
 </body>
 </html>

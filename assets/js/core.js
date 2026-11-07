@@ -4,7 +4,7 @@
    Pour la production, remplacer DB.* par des appels API.
    ========================================================= */
 (function () {
-  const KEY = 'dsi_db_v1';
+  const KEY = 'dsi_db_v2';
   const seed = window.DSI_SEED;
 
   function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
