@@ -1,5 +1,5 @@
 /* Service worker — DJIDONOU SHALOM IMMO : fonctionne hors connexion */
-const CACHE = 'dsi-v2';
+const CACHE = 'dsi-v3';
 const CORE = ['./', 'index.html', 'biens.html', 'bien.html', 'services.html', 'contact.html', 'admin.html', 'offline.html',
   'assets/css/style.css', 'assets/css/admin.css', 'assets/js/data.js', 'assets/js/core.js', 'assets/js/site.js', 'assets/js/admin.js', 'assets/js/fx.js',
   'assets/vendor/leaflet/leaflet.js', 'assets/vendor/leaflet/leaflet.css', 'assets/img/icon.svg', 'assets/img/icon-192.png', 'manifest.webmanifest'];
