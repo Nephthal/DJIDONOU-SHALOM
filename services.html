@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f3b36">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Nos services – DJIDONOU SHALOM IMMO</title>
+  <meta name="description" content="Gestion locative, vente de parcelles, achat et vente accompagnés, sécurisation foncière, recherche de logement et conseil en construction au Bénin.">
+</head>
+<body data-page="services">
+<section class="page-hero">
+  <div class="container">
+    <nav class="crumbs"><a href="index.html">Accueil</a> / <span>Services</span></nav>
+    <h1>Nos services</h1>
+    <p>Une agence, tous vos projets immobiliers : gérer, vendre, acheter, sécuriser et construire.</p>
+  </div>
+</section>
+<section class="section-sm" style="margin-top:-60px;position:relative;z-index:2">
+  <div class="container svc-list" id="services-detail"></div>
+</section>
+
+<section class="section dark" id="gestion-detail">
+  <div class="container">
+    <div class="sec-center reveal"><span class="eyebrow">Gestion locative</span><h2>Ce que nous faisons pour vous, chaque mois</h2></div>
+    <div class="steps">
+      <div class="step reveal"><h3>Mise en location</h3><p>Photos, annonce, visites et sélection rigoureuse des locataires (pièces, garants).</p></div>
+      <div class="step reveal" style="--d:80ms"><h3>Contrat & état des lieux</h3><p>Bail écrit, caution encaissée, état des lieux d'entrée photographié.</p></div>
+      <div class="step reveal" style="--d:160ms"><h3>Encaissement</h3><p>Loyers encaissés, relances, et reversement sur votre compte ou Mobile Money.</p></div>
+      <div class="step reveal" style="--d:240ms"><h3>Entretien & rapport</h3><p>Petites réparations, suivi des factures et rapport mensuel détaillé.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="confier">
+  <div class="container split">
+    <div class="reveal">
+      <span class="eyebrow">Propriétaires & vendeurs</span>
+      <h2>Confiez-nous votre bien ou demandez une estimation gratuite</h2>
+      <p class="muted">Maison, appartement, parcelle ou local commercial : décrivez votre bien, un conseiller vous rappelle sous 24 heures pour organiser une visite d'estimation.</p>
+      <ul class="ticks">
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5L20 7"/></svg><span><b>Estimation gratuite</b>Basée sur les prix réels du quartier.</span></li>
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5L20 7"/></svg><span><b>Visibilité maximale</b>Site, réseaux sociaux, WhatsApp et fichier clients.</span></li>
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5L20 7"/></svg><span><b>Sans engagement</b>Vous décidez après l'estimation.</span></li>
+      </ul>
+    </div>
+    <div class="form-card reveal">
+      <form class="form" data-lead="Confier un bien">
+        <div class="seg"><label><input type="radio" name="subject" value="Gestion locative" checked><span>Gestion locative</span></label><label><input type="radio" name="subject" value="Mise en vente"><span>Vendre</span></label><label><input type="radio" name="subject" value="Estimation"><span>Estimer</span></label></div>
+        <div class="row"><input name="name" placeholder="Nom complet *" required><input name="phone" placeholder="Téléphone / WhatsApp *" type="tel" required></div>
+        <input name="email" placeholder="E-mail" type="email">
+        <div class="row"><select name="budget"><option value="">Type de bien</option><option>Parcelle</option><option>Maison / Villa</option><option>Appartement</option><option>Immeuble</option><option>Bureau / Commerce</option></select><input name="preferredDate" placeholder="Ville / quartier"></div>
+        <textarea name="message" rows="4" placeholder="Décrivez votre bien (surface, nombre de pièces, documents…)"></textarea>
+        <button class="btn btn-primary btn-block">Envoyer ma demande</button>
+      </form>
+      <div class="form-done" hidden><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><b>Merci, demande reçue !</b><p class="muted">Un conseiller vous rappelle sous 24 h.</p><a class="btn btn-wa btn-block" target="_blank" rel="noopener">Continuer sur WhatsApp</a></div>
+    </div>
+  </div>
+</section>
+<script src="assets/vendor/leaflet/leaflet.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

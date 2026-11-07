@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f3b36">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Nos biens – DJIDONOU SHALOM IMMO</title>
+  <meta name="description" content="Parcelles à vendre, maisons, appartements et bureaux à louer au Bénin. Recherche par prix, localisation, surface et document foncier.">
+</head>
+<body data-page="listing">
+<section class="page-hero">
+  <div class="container">
+    <nav class="crumbs"><a href="index.html">Accueil</a> / <span>Nos biens</span></nav>
+    <h1 id="list-title">Nos biens</h1>
+    <p>Parcelles vérifiées, maisons, appartements et bureaux. Affinez votre recherche par prix, localisation, surface ou type de document.</p>
+  </div>
+</section>
+<div class="container list-layout">
+  <aside class="filters" aria-label="Filtres">
+    <h3>Filtres <span><button type="button" id="reset-filters">Réinitialiser</button> <button type="button" class="icon-btn filters-close" data-toggle-filters aria-label="Fermer"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></span></h3>
+    <form id="filters" class="form">
+      <label class="lbl">Recherche<input name="q" placeholder="Quartier, ville, référence…"></label>
+      <div class="seg" role="radiogroup" aria-label="Transaction">
+        <label><input type="radio" name="transaction" value="" checked><span>Tout</span></label>
+        <label><input type="radio" name="transaction" value="vente"><span>Acheter</span></label>
+        <label><input type="radio" name="transaction" value="location"><span>Louer</span></label>
+      </div>
+      <label class="lbl">Type de bien<select name="category"><option value="">Tous</option><option value="parcelle">Parcelle</option><option value="maison">Maison / Villa</option><option value="appartement">Appartement</option><option value="bureau">Bureau / Commerce</option></select></label>
+      <label class="lbl">Ville<select name="city"><option value="">Toutes</option></select></label>
+      <div class="row"><label class="lbl">Prix min<input name="priceMin" type="number" min="0" step="50000" placeholder="FCFA"></label><label class="lbl">Prix max<input name="priceMax" type="number" min="0" step="50000" placeholder="FCFA"></label></div>
+      <label class="lbl">Surface minimum (m²)<input name="surfaceMin" type="number" min="0" step="50" placeholder="ex. 500"></label>
+      <label class="lbl">Chambres<select name="bedrooms"><option value="">Indifférent</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></label>
+      <label class="lbl">Document foncier<select name="document"><option value="">Tous</option><option>Titre Foncier</option><option>CPF</option><option>ADC</option><option>Convention de vente</option></select></label>
+      <label class="check"><input type="checkbox" name="installment" value="1"> Paiement échelonné possible</label>
+      <label class="check"><input type="checkbox" name="available" value="1"> Uniquement les biens disponibles</label>
+      <label class="lbl">Trier par<select name="sort"><option value="recent">Plus récents</option><option value="price-asc">Prix croissant</option><option value="price-desc">Prix décroissant</option><option value="surface">Plus grande surface</option></select></label>
+      <button class="btn btn-primary btn-block">Voir les résultats</button>
+    </form>
+  </aside>
+  <div>
+    <div class="list-top">
+      <div class="grow"><b id="list-count">…</b></div>
+      <button class="btn btn-outline btn-sm filters-close" data-toggle-filters>Filtres</button>
+      <div class="view-toggle" role="group" aria-label="Affichage">
+        <button data-view="grid" aria-label="Grille"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+        <button data-view="list" aria-label="Liste"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></button>
+        <button data-view="map" aria-label="Carte"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg></button>
+      </div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div id="results" class="results"></div>
+    <div id="list-map" class="map" hidden></div>
+
+    <div class="alert-box" id="alerte">
+      <div><span class="eyebrow">Alerte</span><h3>Vous ne trouvez pas votre bien ?</h3><p class="muted" style="margin:0">Décrivez-nous votre recherche : nous vous prévenons dès qu'un bien correspond.</p></div>
+      <div>
+        <form class="form" data-lead="Alerte recherche">
+          <input name="name" placeholder="Nom *" required>
+          <input name="phone" placeholder="Téléphone *" type="tel" required>
+          <input name="message" placeholder="Ex. : parcelle 500 m², Calavi, 8 M">
+          <button class="btn btn-gold">M'alerter</button>
+        </form>
+        <div class="form-done" hidden><b>Alerte enregistrée ✔</b><p class="muted">Nous vous contacterons dès qu'un bien correspond.</p><a class="btn btn-wa btn-sm" target="_blank" rel="noopener">WhatsApp</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/vendor/leaflet/leaflet.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
