@@ -210,7 +210,7 @@
     email: 'nathhoue2468@gmail.com',
     address: "Kpota, Abomey-Calavi – sur les pavés menant à l'embarcadère de Ganvié",
     hours: 'Lun – Sam : 8h00 – 18h30',
-    facebook: '#', instagram: '#', tiktok: '#',
+    facebook: 'https://www.facebook.com/share/1FBMPUiJ9U/', instagram: '', tiktok: 'https://www.tiktok.com/@djidonou_immobilier',
     lat: 6.4475, lng: 2.3612,
   };
 

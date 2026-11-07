@@ -44,7 +44,7 @@
     const mnav = document.createElement('div');
     mnav.className = 'mobile-nav';
     mnav.innerHTML = `${links}<a href="services.html#confier" class="btn btn-gold">Confier mon bien</a>
-      <div class="mobile-nav-foot"><a href="tel:${esc(S().phone.replace(/\s/g, ''))}">${icon('phone')} ${esc(S().phone)}</a><a href="mailto:${esc(S().email)}">${icon('mail')} ${esc(S().email)}</a><a href="admin.html">${icon('settings')} Espace administrateur</a></div>`;
+      <div class="mobile-nav-foot"><a href="tel:${esc(S().phone.replace(/\s/g, ''))}">${icon('phone')} ${esc(S().phone)}</a><a href="mailto:${esc(S().email)}">${icon('mail')} ${esc(S().email)}</a><a href="admin.html">${icon('settings')} Espace administrateur</a>${socials(S())}</div>`;
     document.body.appendChild(mnav);
     const burger = qs('.burger', el);
     const setNav = (open) => { document.body.classList.toggle('nav-open', open); burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu'); burger.innerHTML = icon(open ? 'close' : 'menu'); };
@@ -70,6 +70,11 @@
     document.body.appendChild(tb);
   }
 
+  function socials(s) {
+    const L = [['facebook', 'Facebook'], ['instagram', 'Instagram'], ['tiktok', 'TikTok']].filter(([k]) => s[k] && s[k] !== '#');
+    return L.length ? `<div class="socials">${L.map(([k, n]) => `<a href="${esc(s[k])}" target="_blank" rel="noopener" aria-label="${n}" title="${n}">${icon(k)}</a>`).join('')}</div>` : '';
+  }
+
   function footer() {
     const s = S();
     const f = document.createElement('footer');
@@ -78,7 +83,7 @@
         <div class="btns reveal" style="--d:120ms"><a class="btn btn-gold magnetic" href="contact.html">Prendre rendez-vous ${icon('arrow', 'ico-arrow')}</a><a class="btn btn-ghost-light" href="${waLink('Bonjour Shalom Immo, ')}" target="_blank" rel="noopener">${icon('whatsapp')} WhatsApp</a></div></div></div>
       <div class="container footer-grid">
         <div>${logo(true)}<p class="footer-about">${esc(s.slogan)}. Gestion locative, vente de parcelles, accompagnement à l'achat et à la vente de biens immobiliers au Bénin.</p>
-          <div class="socials"><a href="${esc(s.facebook)}" aria-label="Facebook">f</a><a href="${esc(s.instagram)}" aria-label="Instagram">ig</a><a href="${esc(s.tiktok)}" aria-label="TikTok">tt</a></div></div>
+          ${socials(s)}</div>
         <div><h4>Nos biens</h4><a href="biens.html?transaction=vente&category=parcelle">Parcelles à vendre</a><a href="biens.html?transaction=vente&category=maison">Maisons & villas</a><a href="biens.html?transaction=location">Locations</a><a href="biens.html?transaction=location&category=bureau">Bureaux & commerces</a></div>
         <div><h4>Services</h4><a href="services.html#gestion">Gestion locative</a><a href="services.html#foncier">Sécurisation foncière</a><a href="services.html#accompagnement">Achat & vente accompagnés</a><a href="services.html#confier">Faire estimer mon bien</a></div>
         <div><h4>Contact</h4><a href="tel:${esc(s.phone.replace(/\s/g, ''))}">${icon('phone')} ${esc(s.phone)}</a><a href="${waLink('Bonjour Shalom Immo, ')}" target="_blank" rel="noopener">${icon('whatsapp')} WhatsApp</a><a href="mailto:${esc(s.email)}">${icon('mail')} ${esc(s.email)}</a><span>${icon('pin')} ${esc(s.address)}</span><span>${icon('clock')} ${esc(s.hours)}</span></div>
@@ -437,7 +442,8 @@
       <a href="${waLink('Bonjour Shalom Immo, ')}" target="_blank" rel="noopener" class="cinfo">${icon('whatsapp')}<span><small>WhatsApp</small><b>Écrire maintenant</b></span></a>
       <a href="mailto:${esc(s.email)}" class="cinfo">${icon('mail')}<span><small>E-mail</small><b>${esc(s.email)}</b></span></a>
       <a class="cinfo" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}">${icon('pin')}<span><small>Adresse · itinéraire</small><b>${esc(s.address)}</b></span></a>
-      <div class="cinfo">${icon('clock')}<span><small>Horaires</small><b>${esc(s.hours)}</b></span></div>`;
+      <div class="cinfo">${icon('clock')}<span><small>Horaires</small><b>${esc(s.hours)}</b></span></div>
+      ${socials(s) ? `<div class="cinfo cinfo-social"><span><small>Suivez-nous</small>${socials(s)}</span></div>` : ''}`;
     if (window.L) {
       const map = L.map(qs('#contact-map'), { scrollWheelZoom: false }).setView([s.lat, s.lng], 14);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);

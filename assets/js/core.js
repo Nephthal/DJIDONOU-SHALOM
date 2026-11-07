@@ -24,7 +24,7 @@
 
   let state = load();
   // Remplace l'ancien numéro fictif par le vrai numéro chez les visiteurs ayant déjà ouvert le site
-  const OLD = { whatsapp: '22901000000000', phone: '+229 01 00 00 00 00', email: 'contact@djidonou-shalom-immo.bj', address: 'Abomey-Calavi, Bénin', lat: 6.4486, lng: 2.3557 };
+  const OLD = { whatsapp: '22901000000000', phone: '+229 01 00 00 00 00', email: 'contact@djidonou-shalom-immo.bj', address: 'Abomey-Calavi, Bénin', lat: 6.4486, lng: 2.3557, facebook: '#', instagram: '#', tiktok: '#' };
   if (state.settings) {
     let changed = false;
     Object.keys(OLD).forEach((k) => { if (state.settings[k] === OLD[k]) { state.settings[k] = seed.settings[k]; changed = true; } });
@@ -107,6 +107,9 @@
     money: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/>',
     star: '<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9L12 3Z"/>',
     whatsapp: '<path d="M20.5 3.5A11 11 0 0 0 3.2 16.7L2 22l5.4-1.4A11 11 0 0 0 20.5 3.5Zm-8.5 17a9 9 0 0 1-4.6-1.3l-.3-.2-3.2.8.9-3.1-.2-.3a9 9 0 1 1 7.4 4.1Zm5-6.7c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1l-.9 1.1c-.2.2-.3.2-.6.1a7.4 7.4 0 0 1-3.6-3.2c-.3-.5.3-.4.8-1.4.1-.2 0-.3 0-.4l-.9-2.1c-.2-.6-.5-.5-.6-.5h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.7-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.2-.2-.5-.3Z" fill="currentColor" stroke="none"/>',
+    facebook: '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v7h4v-7h3l1-4h-4V8.5a.5.5 0 0 1 .5-.5Z" fill="currentColor" stroke="none"/>',
+    tiktok: '<path d="M16.6 3h-3.4v12.2a2.8 2.8 0 1 1-2.8-2.8c.3 0 .6 0 .9.1V9a6.3 6.3 0 1 0 5.3 6.2V9.1a7.6 7.6 0 0 0 4.4 1.4V7.1a4.4 4.4 0 0 1-4.4-4.1Z" fill="currentColor" stroke="none"/>',
+    instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/>',
     download: '<path d="M12 3v12M7 10l5 5 5-5M4 21h16"/>',
     upload: '<path d="M12 21V9M7 14l5-5 5 5M4 3h16"/>',
   };
