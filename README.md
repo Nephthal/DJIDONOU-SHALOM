@@ -13,16 +13,17 @@ Site de l'agence immobilière **DJIDONOU SHALOM IMMO** (Bénin) : gestion locati
 | `services.html` | Détail des services et formulaire « Confier mon bien / estimation gratuite » |
 | `contact.html` | Coordonnées, formulaire, carte de l'agence |
 
-### Partie administrateur — `admin.html`
+### Centre de pilotage (administration) — `admin.html`
 Identifiants de démonstration : **admin / shalom2026**. Changez-les dès la première connexion dans *Paramètres*.
 
-- **Tableau de bord** : biens disponibles, nouvelles demandes, loyers encaissés, impayés, graphiques
-- **Biens & annonces** : ajouter, modifier ou supprimer un bien, gérer les photos (import depuis le téléphone ou lien web), placer le bien sur la carte, changer le statut (disponible, réservé, vendu, loué), mettre en avant
-- **Demandes** : toutes les demandes envoyées depuis le site (visites, informations, alertes, biens confiés), avec suivi du statut, réponse WhatsApp en un clic, ajout aux clients et planification de visite
-- **Clients** : fichier clients (prospects, acheteurs, vendeurs, propriétaires, locataires), export CSV
-- **Gestion locative** : contrats, suivi des loyers mois par mois, impayés, relance WhatsApp, commission de l'agence et montant à reverser au propriétaire
-- **Visites** : agenda des visites, confirmation par WhatsApp
-- **Paramètres** : informations de l'agence (téléphone, WhatsApp, e-mail, adresse, réseaux sociaux), mot de passe, sauvegarde et restauration des données
+- **Aujourd'hui** : liste des tâches générée automatiquement (clients à rappeler, visites du jour et du lendemain, loyers à relancer, annonces sans photo) + tâches personnelles, indicateurs animés, semaine en cours, suivi des clients, aperçu des services, activité récente
+- **Suivi clients** : tableau en colonnes (Nouveau → Contacté → Visite prévue → Négociation → Conclu / Perdu), glisser-déposer sur ordinateur, menu « Étape » sur mobile, fiche client avec notes internes
+- **Agenda** : semaine avec visites, échéances de loyer et tâches ; navigation de semaine en semaine
+- **Biens** : cartes avec photo, statut modifiable en un geste, coup de cœur, ajout de photos et position sur la carte
+- **Clients** : fiches par type (prospect, acheteur, vendeur, propriétaire, locataire), export CSV
+- **Gestion locative** : loyers mois par mois, impayés, relance WhatsApp, commission et reversement
+- **Paramètres** : coordonnées de l'agence, mot de passe, sauvegarde et restauration
+- Sur mobile : barre d'onglets en bas, bouton « + » flottant, fenêtres qui montent du bas de l'écran
 
 ### Application mobile (PWA)
 Le site est une *Progressive Web App* : il s'installe sur les téléphones Android et iPhone (« Ajouter à l'écran d'accueil »), avec une icône et un mode hors connexion (`manifest.webmanifest`, `sw.js`). On pourra ensuite le publier sur le Play Store et l'App Store avec **Capacitor** ou **PWABuilder**.

@@ -765,3 +765,11 @@ body.nav-open .tabbar, body.nav-open .wa-float { visibility: hidden; }
 .mobile-nav .socials a { opacity: 1; transform: none; font-size: 1rem; padding: 0; }
 .cinfo-social .socials { margin-top: 8px; }
 .cinfo-social .socials a { border-color: var(--line); color: var(--green); }
+
+/* Logo plus discret sur mobile */
+@media (max-width: 960px) { .logo img, .scrolled .logo img { height: 40px; } }
+@media (max-width: 640px) {
+  .logo img, .scrolled .logo img { height: 32px; }
+  .site-footer .logo img { height: 50px; }
+  .pre-logo { width: min(220px, 58vw); }
+}
