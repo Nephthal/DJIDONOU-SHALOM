@@ -95,10 +95,10 @@
     track.addEventListener('scroll', upd, { passive: true }); window.addEventListener('resize', upd); setTimeout(upd, 300);
     // glisser à la souris
     let down = false, sx = 0, sl = 0, moved = false;
-    track.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = track.scrollLeft; track.classList.add('drag'); });
-    window.addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 5) moved = true; track.scrollLeft = sl - dx; });
+    track.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse' || e.button !== 0) return; down = true; moved = false; sx = e.clientX; sl = track.scrollLeft; });
+    window.addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - sx; if (!moved && Math.abs(dx) > 6) { moved = true; track.classList.add('drag'); } if (moved) track.scrollLeft = sl - dx; });
     window.addEventListener('pointerup', () => { down = false; track.classList.remove('drag'); });
-    track.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    track.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); } moved = false; }, true);
     // défilement automatique doux
     if (root.dataset.carousel === 'auto' && !reduce) {
       let pause = false; root.addEventListener('pointerenter', () => (pause = true)); root.addEventListener('pointerleave', () => (pause = false));

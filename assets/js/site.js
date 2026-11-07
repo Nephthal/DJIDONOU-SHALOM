@@ -47,10 +47,11 @@
       <div class="mobile-nav-foot"><a href="tel:${esc(S().phone.replace(/\s/g, ''))}">${icon('phone')} ${esc(S().phone)}</a><a href="mailto:${esc(S().email)}">${icon('mail')} ${esc(S().email)}</a><a href="admin.html">${icon('settings')} Espace administrateur</a></div>`;
     document.body.appendChild(mnav);
     const burger = qs('.burger', el);
-    burger.addEventListener('click', () => {
-      const open = !document.body.classList.contains('nav-open');
-      document.body.classList.toggle('nav-open', open); burger.setAttribute('aria-expanded', open); burger.innerHTML = icon(open ? 'close' : 'menu');
-    });
+    const setNav = (open) => { document.body.classList.toggle('nav-open', open); burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu'); burger.innerHTML = icon(open ? 'close' : 'menu'); };
+    burger.addEventListener('click', () => setNav(!document.body.classList.contains('nav-open')));
+    mnav.addEventListener('click', (e) => { if (e.target.closest('a')) setNav(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setNav(false); });
+    window.addEventListener('pageshow', () => setNav(false));
     let last = 0;
     const onScroll = () => {
       const y = window.scrollY;
@@ -201,7 +202,9 @@
     if (!e.target.closest('[data-install]') || !deferred) return;
     deferred.prompt(); await deferred.userChoice; deferred = null; qsa('[data-install]').forEach((b) => (b.hidden = true));
   });
-  if ('serviceWorker' in navigator && location.protocol !== 'file:') window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then((r) => r.update()).catch(() => {});
+  });
 
   /* ================= PAGES ================= */
   const visible = () => DB.all('properties');

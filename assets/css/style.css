@@ -745,3 +745,16 @@ a.cinfo:hover b { color: var(--gold); }
 .logo img { height: 60px; }
 .scrolled .logo img { height: 48px; }
 @media (max-width: 640px) { .logo img, .scrolled .logo img { height: 42px; } }
+
+/* Menu mobile : l'en-tête (logo + bouton fermer) reste au-dessus du menu ouvert */
+body.nav-open .site-header { z-index: 1700; background: transparent !important; box-shadow: none !important; border-color: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; transform: none !important; }
+body.nav-open .tabbar, body.nav-open .wa-float { visibility: hidden; }
+
+/* Mobile : le panneau de filtres passe au-dessus de l'en-tête et se ferme facilement */
+@media (max-width: 960px) {
+  .list-layout { z-index: auto; }
+  .filters { z-index: 2200; padding: 20px 20px calc(30px + env(safe-area-inset-bottom)); }
+  .filters h3 { position: sticky; top: -20px; background: var(--paper); padding: 14px 0; margin: -20px 0 10px; z-index: 2; }
+  body.filters-open { overflow: hidden; }
+  body.filters-open .tabbar, body.filters-open .wa-float, body.filters-open .site-header { visibility: hidden; }
+}
